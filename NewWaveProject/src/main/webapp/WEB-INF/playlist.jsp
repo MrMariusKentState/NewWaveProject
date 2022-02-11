@@ -10,6 +10,7 @@
 <title>Playlist!</title>
 </head>
 <body>
-	<h1>Welcome [John Q!]</h1>
+	<a href="/logout">Logout</a>
+	<h1>Welcome <c:out value = "${person.firstname}" />!</h1>
 </body>
 </html>

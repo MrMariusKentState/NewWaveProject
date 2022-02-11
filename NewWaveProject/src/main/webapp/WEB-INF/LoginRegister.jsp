@@ -54,18 +54,19 @@
 				            <form:errors class = "text-danger" path = "email"/>
 				            
 				        </p>
-				        <p>
-				            <form:label path="username">Username:</form:label>
-				            <form:password path="username"/>
-				            <br>
-				            <form:errors class = "text-danger" path = "username"/>
-				            
-				        </p>
+				        
 				        <p>
 				            <form:label path="password">Password:</form:label>
 				            <form:password path="password"/>
 				            <br>
 				            <form:errors class = "text-danger" path = "password"/>
+				            
+				        </p>
+				        <p>
+				            <form:label path="confirmpassword">Confirm Password:</form:label>
+				            <form:password path="confirmpassword"/>
+				            <br>
+				            <form:errors class = "text-danger" path = "confirmpassword"/>
 				            
 				        </p>
 				        
@@ -76,19 +77,16 @@
 				<div id = "rightcol">
 					<p>Login and create a playlist of all your favorite Police tracks!:</p>
 		    		<form:form method="POST" action="/login" modelAttribute="newuser">
-		    			<c:out value = "${error}"/>
+		    			<p id = "loginconfirm"><c:out value = "${error}"/></p>
 		     				<p>
-					            <form:label path="username">Email:</form:label>
-					            <form:input type="text" path="username"/>
+					            <form:label path="email">Email:</form:label>
+					            <form:input type="text" path="email"/>
 			        		</p>
 			    			<p>
 					            <form:label path="password">Password:</form:label>
 					            <form:password path="password"/>
 			        		</p>
-			        		<p>
-					            <form:label path="confirmpassword">Confirm Password:</form:label>
-					            <form:password path="confirmpassword"/>
-			        		</p>
+		
 		        		<input type="submit" class="btn btn-primary" value="Login"/>
 		     		</form:form>
 				</div>

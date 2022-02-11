@@ -26,14 +26,15 @@ public boolean supports(Class<?> clazz) {
 public void validate(Object target, Errors errors) {
     User user = (User) target;
     
-//    if (!user.getConfirmpassword().equals(user.getPassword())) {
-//        // 3
-//        errors.rejectValue("confirmpassword", "Match", "Your Password and Password Confirmation must match.");
-//    } 
+    if (!user.getConfirmpassword().equals(user.getPassword())) {
+        // 3
+        errors.rejectValue("confirmpassword", "Match", "Your Password and Password Confirmation must match.");
+    } 
     
     if(userrepository.existsByEmail(user.getEmail())) {
     	errors.rejectValue("email", "emailerror", "This email already exists.  Please enter a different email.");
     }
+
 }
 
 

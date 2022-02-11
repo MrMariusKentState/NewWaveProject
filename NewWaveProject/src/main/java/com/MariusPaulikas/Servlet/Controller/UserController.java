@@ -54,6 +54,7 @@ public class UserController {
 	}
 	
 	
+
 	@RequestMapping(value="/registration/submit", method=RequestMethod.POST)
 	public String registerUser(@Valid @ModelAttribute("newuser") User user, BindingResult result, HttpSession session) {
 		 uservalidator.validate(user, result);
@@ -88,9 +89,26 @@ public class UserController {
 	
 	
 	@RequestMapping ("/police45/playlist")
-	public String playlistPage()  {
+	public String playlistPage(HttpSession session, Model model)  {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
+	
+		Long l = (Long)session.getAttribute("userId");
+		User listener = userservice.findUserById(l);
+		model.addAttribute("person", listener);
+		
 		return "playlist.jsp";
 	}
+	
+	
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/police45";
+	}
+	
 	
 	
 	

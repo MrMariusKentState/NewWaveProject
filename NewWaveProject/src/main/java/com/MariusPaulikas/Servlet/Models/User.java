@@ -34,18 +34,24 @@ public class User {
 	private String email;
 	
 	
-	@NonNull
-	@Size(min = 3, message = "Your username must be at least 3 characters in length.")
-	private String username;
-	
-	
 
 	@NonNull
 	@Size (min = 5, message = "Your password must be at least 5 characters in length.")
 	private String password;
 	
+	
 	@Transient
 	private String confirmpassword;
+	
+	
+	
+	
+	
+	
+	
+	public User() {
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -77,14 +83,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	
 	public String getPassword() {
