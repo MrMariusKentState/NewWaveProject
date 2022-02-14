@@ -7,10 +7,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Playlist!</title>
+<title>Welcome!</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/playlist.css"/>
 </head>
 <body>
-	<a href="/logout">Logout</a>
-	<h1>Welcome <c:out value = "${person.firstname}" />!</h1>
+	<div id = "container">
+			<div id = "upper">	
+				<img src = '<c:url value="/resources/Policebanner.jpg"/>' id = "banner" alt = "banner">
+			</div>
+			<div id = "header">
+				<p class = "one"><a href = '/police45/albums'>Albums</a></p>
+				<p class = "one"><a href = '/police45/biography'>Biography</a></p>
+				<p class = "one"><a href = '/police45/edit/${person.id}'>Edit Profile</a></p>
+				<p class = "one"><a href="/logout">Logout</a></p>
+			</div>
+		<h1>Welcome <c:out value = "${person.firstname}" />!</h1>
+		
+	</div>
 </body>
 </html>

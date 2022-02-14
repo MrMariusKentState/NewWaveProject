@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,9 +72,37 @@ public class UserController {
 		 
 	 }
 	
+
+	@RequestMapping(value = "/police45/update/{id}", method=RequestMethod.POST)
+	public String UpdateUser(@Valid @ModelAttribute("edituser") User user, @PathVariable("id") Long id, BindingResult result, HttpSession session,  Model model, RedirectAttributes redirectattributes) {	
+		
+		if (session.getAttribute("id") == null) {
+			return "redirect:/police45";
+		}
+		
+		Long userid = (Long)session.getAttribute("userId");
+		User u = userservice.findUserById(userid);
+		model.addAttribute("user", u);
+		uservalidator.validate(u, result);
+		
+		
+		if(result.hasErrors()) {
+			 return "UserEdit.jsp";
+		}
+		
+		
+		else {
+		
+		userservice.updateUser(u.getId(), u.getEmail(), u.getFirstname(), u.getLastname(), u.getPassword());
+		redirectattributes.addFlashAttribute("success", "Your registration info has been successfully updated!");
+		return "redirect:/police45/edit/{id}";
+		}
+	
+	}
+	
 	
 	@RequestMapping (value="/login", method=RequestMethod.POST) 
-	public String loginUser (@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session, RedirectAttributes redirectattributes) {
+	public String loginUser (@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session, Model model, RedirectAttributes redirectattributes) {
 		 if(userservice.authenticateUser(email, password)) {
 			User client = userservice.findByEmail(email);
 			session.setAttribute("userId", client.getId());
@@ -100,6 +129,20 @@ public class UserController {
 		
 		return "playlist.jsp";
 	}
+	
+	
+	@RequestMapping("/police45/edit/{id}")
+	public String editIdeaPage(@PathVariable("id") Long id, @ModelAttribute("edituser") User user, HttpSession session, Model model) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
+		
+		Long userid = (Long)session.getAttribute("userId");
+		User u = userservice.findUserById(userid);
+		model.addAttribute("user", u);
+		return "UserEdit.jsp";
+	}
+	
 	
 	
 	

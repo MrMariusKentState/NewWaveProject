@@ -45,9 +45,21 @@ public class UserService {
 	        return userrepository.save(user);
 	    }
 	
+	 
+	 public User updateUser(Long id, String email, String firstname, String lastname, String password) {
+	 	User user = this.findUserById(id);
+	 	String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setEmail(email);
+	 	user.setFirstname(firstname);
+	 	user.setLastname(lastname);
+	 	user.setPassword(hashed);
+	 	return userrepository.save(user);
+	 	
+	 }
 
 	 
-	 public User findByEmail(String email) {
+
+	public User findByEmail(String email) {
 	        return userrepository.findByEmail(email);
 	    }
 	 
@@ -77,5 +89,8 @@ public class UserService {
 	            }
 	        }
 	    }
+	 
+
+	
 	
 }
