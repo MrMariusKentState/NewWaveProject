@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-
+import com.MariusPaulikas.Servlet.Models.Song;
 import com.MariusPaulikas.Servlet.Models.User;
 import com.MariusPaulikas.Servlet.Repositories.UserRepository;
 
@@ -91,6 +91,18 @@ public class UserService {
 	    }
 	 
 
+	 public User AddSong (Song s, User u) {
+		 List<Song> mysongs = u.getSongs();
+		 mysongs.add(s);
+		 return userrepository.save(u);
+	 }
+	
+	 
+	 public User RemoveSong (Song s, User u) {
+		 List<Song> mysongs = u.getSongs();
+		 mysongs.remove(s);
+		 return userrepository.save(u);
+	 }
 	
 	
 }

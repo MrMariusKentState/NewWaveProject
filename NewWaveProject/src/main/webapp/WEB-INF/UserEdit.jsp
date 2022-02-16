@@ -47,13 +47,13 @@
 				            
 		        </p>
 		        <p>
-		            <form:label path="password">New Password:</form:label>
+		            <form:label path="password">New Password (will remain hidden):</form:label>
 		            <form:password path="password"/>
 		            <br>
 		            <form:errors class = "text-danger" path = "password"/>      
 		        </p>
 		        <p>
-		            <form:label path="confirmpassword">Confirm Password:</form:label>
+		            <form:label path="confirmpassword">Confirm Password (will remain hidden):</form:label>
 		            <form:password path="confirmpassword"/>
 		            <br>
 		            <form:errors class = "text-danger" path = "confirmpassword"/>    

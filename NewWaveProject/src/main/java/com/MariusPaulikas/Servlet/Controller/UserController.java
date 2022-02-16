@@ -1,5 +1,7 @@
 package com.MariusPaulikas.Servlet.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
+import com.MariusPaulikas.Servlet.Models.Album;
+import com.MariusPaulikas.Servlet.Models.Song;
 import com.MariusPaulikas.Servlet.Models.User;
+import com.MariusPaulikas.Servlet.Services.AlbumService;
+import com.MariusPaulikas.Servlet.Services.SongService;
 import com.MariusPaulikas.Servlet.Services.UserService;
 import com.MariusPaulikas.Servlet.Validator.UserValidator;
 
@@ -25,12 +32,20 @@ public class UserController {
 	@Autowired
 	private UserService userservice;
 	
+	@Autowired 
+	private SongService songservice;
+	
+	@Autowired
+	private final AlbumService albumservice;
+	
 	@Autowired
 	private final UserValidator uservalidator;
 	
 
-	public UserController (UserService userservice, UserValidator uservalidator) {
+	public UserController (UserService userservice, SongService songservice, AlbumService albumservice, UserValidator uservalidator) {
 		this.userservice = userservice;
+		this.songservice = songservice;
+		this.albumservice = albumservice;
 		this.uservalidator = uservalidator;
 	}
 	
@@ -58,6 +73,7 @@ public class UserController {
 
 	@RequestMapping(value="/registration/submit", method=RequestMethod.POST)
 	public String registerUser(@Valid @ModelAttribute("newuser") User user, BindingResult result, HttpSession session) {
+		 
 		 uservalidator.validate(user, result);
 		 if(result.hasErrors()) {
 			 return "LoginRegister.jsp";
@@ -73,27 +89,37 @@ public class UserController {
 	 }
 	
 
-	@RequestMapping(value = "/police45/update/{id}", method=RequestMethod.POST)
-	public String UpdateUser(@Valid @ModelAttribute("edituser") User user, @PathVariable("id") Long id, BindingResult result, HttpSession session,  Model model, RedirectAttributes redirectattributes) {	
-		
-		if (session.getAttribute("id") == null) {
+	@RequestMapping("/police45/edit/{id}")
+	public String editIdeaPage(@PathVariable("id") Long id, @ModelAttribute("edituser") User user, HttpSession session, Model model) {
+		if (session.getAttribute("userId") == null) {
 			return "redirect:/police45";
 		}
 		
 		Long userid = (Long)session.getAttribute("userId");
 		User u = userservice.findUserById(userid);
 		model.addAttribute("user", u);
-		uservalidator.validate(u, result);
+		return "UserEdit.jsp";
+	}
+	
+	
+	
+	@RequestMapping(value = "/police45/update/{id}", method=RequestMethod.POST)
+	public String UpdateUser(@Valid @ModelAttribute("edituser") User user, @PathVariable("id") Long id, BindingResult result, HttpSession session,  RedirectAttributes redirectattributes) {	
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
 		
 		
+		uservalidator.validate(user, result);	
 		if(result.hasErrors()) {
 			 return "UserEdit.jsp";
 		}
 		
 		
 		else {
+		userservice.updateUser(id, user.getEmail(), user.getFirstname(), user.getLastname(), user.getPassword());
 		
-		userservice.updateUser(u.getId(), u.getEmail(), u.getFirstname(), u.getLastname(), u.getPassword());
 		redirectattributes.addFlashAttribute("success", "Your registration info has been successfully updated!");
 		return "redirect:/police45/edit/{id}";
 		}
@@ -131,19 +157,67 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/police45/edit/{id}")
-	public String editIdeaPage(@PathVariable("id") Long id, @ModelAttribute("edituser") User user, HttpSession session, Model model) {
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/police45";
-		}
+
+	@RequestMapping ("/police45/albums")
+	public String Albums (HttpSession session, Model model) {
 		
-		Long userid = (Long)session.getAttribute("userId");
-		User u = userservice.findUserById(userid);
-		model.addAttribute("user", u);
-		return "UserEdit.jsp";
+		Long l = (Long)session.getAttribute("userId");
+		User user = userservice.findUserById(l);
+		model.addAttribute("person", user);
+		
+		List<Album> allalbums = albumservice.allAlbums();
+		model.addAttribute("allalbums", allalbums);
+		
+		return "albums.jsp";
+		
 	}
 	
 	
+	@RequestMapping ("/police45/albums/{id}")
+	public String Songlist (@PathVariable("id") Long id, HttpSession session, Model model) {
+		
+		Long l = (Long)session.getAttribute("userId");
+		User user = userservice.findUserById(l);
+		model.addAttribute("person", user);
+		
+		Album album = albumservice.findAlbums(id);
+		model.addAttribute("album",album);
+		
+		List<Song> mysongs = album.getSongs();
+		model.addAttribute("mysongs", mysongs);
+		
+		return "albumsongs.jsp";
+	}
+	
+	
+
+	@RequestMapping("{chart_notes}")
+	public String spotify(@PathVariable("chart_notes") String chart_notes){
+		return (chart_notes);
+	}
+	
+	
+	@RequestMapping("/song/unlike/{id}")
+	public String UnlikeSong (@PathVariable("id") Long id, HttpSession session) {
+		Long l = (Long)session.getAttribute("userId");
+		User user = userservice.findUserById(l);
+		
+		Song song = songservice.findSongs(id);
+		userservice.AddSong(song, user);
+		return "redirect:/police45/albums/{id}";
+		
+	}
+	
+	@RequestMapping("/song/like/{id}")
+	public String LikeSong (@PathVariable("id") Long id, HttpSession session) {
+		Long l = (Long)session.getAttribute("userId");
+		User user = userservice.findUserById(l);
+		
+		Song song = songservice.findSongs(id);
+		userservice.RemoveSong(song, user);
+		return "redirect:/police45/albums/{id}";
+		
+	}
 	
 	
 	@RequestMapping("/logout")
@@ -151,7 +225,6 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/police45";
 	}
-	
 	
 	
 	

@@ -10,6 +10,7 @@
 <title>Welcome!</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="/playlist.css"/>
+
 </head>
 <body>
 	<div id = "container">
@@ -24,6 +25,14 @@
 			</div>
 		<h1>Welcome <c:out value = "${person.firstname}" />!</h1>
 		
+		
+		
 	</div>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src = "/API.js" type='text/javascript'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"  ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>     
+
 </body>
 </html>

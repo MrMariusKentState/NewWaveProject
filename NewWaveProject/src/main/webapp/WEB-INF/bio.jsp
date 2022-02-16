@@ -20,15 +20,14 @@
 		<div id = "upper">	
 			<img src = '<c:url value="/resources/Policebanner.jpg"/>' id = "banner" alt = "banner">
 		</div>
-	
+		
 		<div id = "header">
-					<p class = "one"><a href = '/police45/albums'>Albums</a></p>
-					<p class = "one"><a href = '/returnpolice45'>Login</a></p>
+					<p class = "one"><a href = '/returnpolice45'>Back to Login page</a></p>
 				</div>
 		<h1>A short biography of the Police:</h1>
-		<p> The Police are a new-wave band that were spawned from the post-punk era of the late 1970s. 
-		The band consisted of Steward Copeland (drums), Andy Summers (guitar), and Gordon Sumner alias Sting (bass, vocals). 
-		The band first formed in Essex County in London in 1977.  The first album was released in 1978 (Outlandos D'Amour), which launched the
+		<p> The Police are a band that blended rock and new-wave music genres in the late 1970s and early 1980s.  Spawned by the post-'punk' era,
+		the band consisted of Steward Copeland (drums), Andy Summers (guitar), and Gordon Sumner alias Sting (bass, vocals). 
+		The band first formed in Essex County in London in 1977. The first album was released in 1978 (Outlandos D'Amour), which launched the
 		band's first charting U.S. hit "Roxanne."  The band's sophomore effort Regatta de Blanc spawned the hits "Message in a Bottle" and
 		the band's first #1 hit in the U.K. "Walking on the Moon."  In 1980, the band released their breakthrough U.S. album Zenyatta Mondatta, 
 		which spawned two Top 10 U.S. Billboard Hits "Don't Stand So Close To Me" and "De Do Do Do De Da Da Da."  The band's fourth album "Ghost In the Machine"

@@ -32,31 +32,3 @@ h1 {
 	margin-bottom: 20px;
 	text-align: center;
 }
-
-#banner {
-
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 235px;
-	height: 150px;
-	
-}
-
-.one {
-	display: inline-block;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 10px;
-	font-weight: bold;
-	
-}
-
-tr, thead {
-    border: solid black 1px;
-}
-
-
-tr {
-    display: block;
-}

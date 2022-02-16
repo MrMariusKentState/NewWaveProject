@@ -22,16 +22,16 @@
 			<img src = '<c:url value="/resources/Policebanner.jpg"/>' id = "banner" alt = "banner">
 		</div>
 		<div id = "eighties">
-			
+				<h1>The Police at 45!</h1>
+				<h3>Cataloging all the hits since 1977</h3>
 				<div id = "header">
-					<p class = "one"><a href = '/police45/albums'>Albums</a></p>
-					<p class = "one"><a href = '/police45/biography'>Biography</a></p>
+					<p>Click on the <a href = '/police45/biography'>Biography</a> link to learn more about the classic rock band the Police!
+					Or, create a FREE account and make your own custom playlist of songs from the Police!</p>
 				</div>
-			<h1>The Police at 45!</h1>
-			<h3>Cataloging all the hits since 1977</h3>
+			
 			<div id = "middle">
 				<div id = "leftcol">
-					<p>Create an account and make your own custom Police track list! </p>
+					<p>Create a free account! </p>
 			 		<form:form method="POST" action="/registration/submit" modelAttribute="newuser">
 				 
 				        <p>
@@ -75,7 +75,7 @@
 				</div>
 				
 				<div id = "rightcol">
-					<p>Login and create a playlist of all your favorite Police tracks!:</p>
+					<p>Login to create a playlist of all your favorite Police tracks!:</p>
 		    		<form:form method="POST" action="/login" modelAttribute="newuser">
 		    			<p id = "loginconfirm"><c:out value = "${error}"/></p>
 		     				<p>

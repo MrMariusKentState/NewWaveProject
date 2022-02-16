@@ -1,15 +1,20 @@
 package com.MariusPaulikas.Servlet.Models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import org.springframework.lang.NonNull;
+
 
 @Entity
 @Table(name = "user")
@@ -45,7 +50,8 @@ public class User {
 	
 	
 	
-	
+	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Song> songs;
 	
 	
 	
@@ -99,6 +105,14 @@ public class User {
 
 	public void setConfirmpassword(String confirmpassword) {
 		this.confirmpassword = confirmpassword;
+	}
+
+	public List<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(List<Song> songs) {
+		this.songs = songs;
 	}
 	
 	
