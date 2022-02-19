@@ -90,19 +90,24 @@ public class UserService {
 	        }
 	    }
 	 
+	 
 
-	 public User AddSong (Song s, User u) {
+	 
+
+	 public User AddSong (User u, Song s) {
 		 List<Song> mysongs = u.getSongs();
 		 mysongs.add(s);
 		 return userrepository.save(u);
 	 }
 	
 	 
-	 public User RemoveSong (Song s, User u) {
+	 public User RemoveSong (User u, Song s) {
 		 List<Song> mysongs = u.getSongs();
 		 mysongs.remove(s);
 		 return userrepository.save(u);
 	 }
 	
+	 
+	 
 	
 }

@@ -10,7 +10,7 @@
 <meta charset="ISO-8859-1">
 <title>Police albums</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/albums.css"/>
+<link rel="stylesheet" href="/resources/albums.css"/>
 </head>
 <body>
 		<div id = "container">
@@ -18,12 +18,13 @@
 				<img src = '<c:url value="/resources/Policebanner.jpg"/>' id = "banner" alt = "banner">
 			</div>
 			<div id = "header">
-				<p class = "one"><a href = '/police45/biography'>Biography</a></p>
-				<p class = "one"><a href = '/police45/edit/${person.id}'>Edit Profile</a></p>
+				<p class = "one"><a href = '/police45/playlist'>Playlist</a></p>
+				
 				<p class = "one"><a href="/logout">Logout</a></p>
 			</div>
 		<h1>Welcome <c:out value = "${person.firstname}" />!</h1>
-		
+		<h3>Here is a list of studio albums released by the Police:</h3>
+		<p>Select an album below to add tracks to your custom playlist!</p>
 		
 		
 	</div>

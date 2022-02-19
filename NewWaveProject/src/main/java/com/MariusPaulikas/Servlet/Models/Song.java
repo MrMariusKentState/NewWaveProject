@@ -1,11 +1,15 @@
 package com.MariusPaulikas.Servlet.Models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -22,9 +26,11 @@ public class Song {
 	
 	private String song_title;
 	
+	private String a;
+	
 	private String chart_notes;
 	
-		
+	
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -34,9 +40,43 @@ public class Song {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="song_album_id")
 	private Album album;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+		@JoinTable(
+		name = "songs_users",
+		joinColumns = @JoinColumn(name = "song_title_song_id"),
+		inverseJoinColumns = @JoinColumn(name = "user_id")
+		)
+	private List<User> users;
+	
+	
+	
+	public String getA() {
+		return a;
+	}
 
-	
-	
+	public void setA(String a) {
+		this.a = a;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+		
+
+	public void setSong_title(String song_title) {
+		this.song_title = song_title;
+	}
+
+	public void setChart_notes(String chart_notes) {
+		this.chart_notes = chart_notes;
+	}
+
 	public User getUser() {
 		return user;
 	}

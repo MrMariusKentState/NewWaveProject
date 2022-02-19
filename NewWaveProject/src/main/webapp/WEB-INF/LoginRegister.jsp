@@ -11,7 +11,7 @@
 <meta charset="ISO-8859-1">
 <title>The Police at 45!</title>
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/LoginRegister.css"/>
+<link rel="stylesheet" href="/resources/LoginRegister.css"/>
 </head>
 
 

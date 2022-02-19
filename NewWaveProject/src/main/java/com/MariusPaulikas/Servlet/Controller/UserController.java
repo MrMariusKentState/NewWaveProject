@@ -88,44 +88,50 @@ public class UserController {
 		 
 	 }
 	
-
-	@RequestMapping("/police45/edit/{id}")
-	public String editIdeaPage(@PathVariable("id") Long id, @ModelAttribute("edituser") User user, HttpSession session, Model model) {
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/police45";
-		}
-		
-		Long userid = (Long)session.getAttribute("userId");
-		User u = userservice.findUserById(userid);
-		model.addAttribute("user", u);
-		return "UserEdit.jsp";
-	}
+//Below I have two routes where it was my intention to create a page where a user can modify his/her registration information.
+//While I was successful in the modification aspect, the validators were not correctly connecting in the modification process.
+//This would result in the program crashing, rather than successfully rendering the error messages if the input criteria for each field were not met.
+//This may be an aspect of the project I may go back and work on again at a later time.
+	
+//	@RequestMapping("/police45/edit/{id}")
+//	public String editIdeaPage(@PathVariable("id") Long id, @ModelAttribute("edituser") User user, HttpSession session, Model model) {
+//		if (session.getAttribute("userId") == null) {
+//			return "redirect:/police45";
+//		}
+//		
+//		Long userid = (Long)session.getAttribute("userId");
+//		User u = userservice.findUserById(userid);
+//		model.addAttribute("user", u);
+//		return "UserEdit.jsp";
+//	}
 	
 	
 	
-	@RequestMapping(value = "/police45/update/{id}", method=RequestMethod.POST)
-	public String UpdateUser(@Valid @ModelAttribute("edituser") User user, @PathVariable("id") Long id, BindingResult result, HttpSession session,  RedirectAttributes redirectattributes) {	
-		
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/police45";
-		}
-		
-		
-		uservalidator.validate(user, result);	
-		if(result.hasErrors()) {
-			 return "UserEdit.jsp";
-		}
-		
-		
-		else {
-		userservice.updateUser(id, user.getEmail(), user.getFirstname(), user.getLastname(), user.getPassword());
-		
-		redirectattributes.addFlashAttribute("success", "Your registration info has been successfully updated!");
-		return "redirect:/police45/edit/{id}";
-		}
-	
-	}
-	
+//	@RequestMapping(value = "/police45/update/{id}", method=RequestMethod.POST)
+//	public String UpdateUser(@Valid @ModelAttribute("edituser") User user, @PathVariable("id") Long id, BindingResult result, HttpSession session,  RedirectAttributes redirectattributes) {	
+//		
+//		
+//		
+//		if (session.getAttribute("userId") == null) {
+//			return "redirect:/police45";
+//		}
+//		
+//		
+//		uservalidator.validate(user, result);	
+//		if(result.hasErrors()) {
+//			 return "UserEdit.jsp";
+//		}
+//		
+//		
+//		else {
+//		userservice.updateUser(id, user.getEmail(), user.getFirstname(), user.getLastname(), user.getPassword());
+//		
+//		redirectattributes.addFlashAttribute("success", "Your registration info has been successfully updated!");
+//		return "redirect:/police45/edit/{id}";
+//		}
+//	
+//	}
+//	
 	
 	@RequestMapping (value="/login", method=RequestMethod.POST) 
 	public String loginUser (@RequestParam("email") String email, @RequestParam("password") String password, HttpSession session, Model model, RedirectAttributes redirectattributes) {
@@ -153,6 +159,9 @@ public class UserController {
 		User listener = userservice.findUserById(l);
 		model.addAttribute("person", listener);
 		
+		List<Song> allsongs = listener.getSongs();
+		model.addAttribute("allsongs", allsongs);
+		
 		return "playlist.jsp";
 	}
 	
@@ -160,6 +169,10 @@ public class UserController {
 
 	@RequestMapping ("/police45/albums")
 	public String Albums (HttpSession session, Model model) {
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
 		
 		Long l = (Long)session.getAttribute("userId");
 		User user = userservice.findUserById(l);
@@ -175,6 +188,10 @@ public class UserController {
 	
 	@RequestMapping ("/police45/albums/{id}")
 	public String Songlist (@PathVariable("id") Long id, HttpSession session, Model model) {
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
 		
 		Long l = (Long)session.getAttribute("userId");
 		User user = userservice.findUserById(l);
@@ -197,25 +214,65 @@ public class UserController {
 	}
 	
 	
-	@RequestMapping("/song/unlike/{id}")
-	public String UnlikeSong (@PathVariable("id") Long id, HttpSession session) {
+	@RequestMapping("/song/like/{album_id}/{song_id}")
+	public String LikeSong (@PathVariable("album_id") Long albumid, @PathVariable("song_id") Long songid, HttpSession session, RedirectAttributes redirectattributes) {
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
+		
+		Long l = (Long)session.getAttribute("userId");
+		User user = userservice.findUserById(l);
+				
+		userservice.AddSong(user, songservice.findSongs(songid));
+		Song song = songservice.findSongs(songid);
+		
+		String title = song.getSong_title();
+		
+		redirectattributes.addFlashAttribute("success", "'" + title + "' has been added to your playlist!");
+		
+		return "redirect:/police45/albums/{album_id}";
+		
+	}
+
+	
+	
+	
+	@RequestMapping("/song/unlike/{album_id}/{song_id}")
+	public String UnlikeSong (@PathVariable("album_id") Long albumid, @PathVariable("song_id") Long songid, HttpSession session, RedirectAttributes redirectattributes) {
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
+		
 		Long l = (Long)session.getAttribute("userId");
 		User user = userservice.findUserById(l);
 		
-		Song song = songservice.findSongs(id);
-		userservice.AddSong(song, user);
-		return "redirect:/police45/albums/{id}";
+		userservice.RemoveSong(user, songservice.findSongs(songid));
+
+		Song song = songservice.findSongs(songid);
+		String title = song.getSong_title();
+		redirectattributes.addFlashAttribute("remove", "'" + title + "' has been removed from your playlist.");
+		
+		return "redirect:/police45/albums/{album_id}";
 		
 	}
 	
-	@RequestMapping("/song/like/{id}")
-	public String LikeSong (@PathVariable("id") Long id, HttpSession session) {
+	
+	@RequestMapping("/song/unlike/{song_id}")
+	public String RemoveSong (@PathVariable("song_id") Long songid, HttpSession session) {
+		
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/police45";
+		}
+		
 		Long l = (Long)session.getAttribute("userId");
 		User user = userservice.findUserById(l);
 		
-		Song song = songservice.findSongs(id);
-		userservice.RemoveSong(song, user);
-		return "redirect:/police45/albums/{id}";
+		userservice.RemoveSong(user, songservice.findSongs(songid));
+
+		return "redirect:/police45/playlist";
+	
 		
 	}
 	

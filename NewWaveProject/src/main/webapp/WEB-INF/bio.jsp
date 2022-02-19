@@ -11,7 +11,7 @@
 <title>Biography</title>
 
 <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/Bio.css"/>
+<link rel="stylesheet" href="/resources/Bio.css"/>
 
 </head>
 <body>

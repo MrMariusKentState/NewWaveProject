@@ -7,6 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -51,10 +54,28 @@ public class User {
 	
 	
 	@OneToMany(mappedBy="user", fetch = FetchType.LAZY)
+	private List<Song> addedsong;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+	name = "songs_users",
+	joinColumns = @JoinColumn(name = "user_id"),
+	inverseJoinColumns = @JoinColumn(name = "song_title_song_id")
+	)
+	
 	private List<Song> songs;
 	
 	
 	
+	
+	public List<Song> getAddedsong() {
+		return addedsong;
+	}
+
+	public void setAddedsong(List<Song> addedsong) {
+		this.addedsong = addedsong;
+	}
+
 	public User() {
 		
 	}
