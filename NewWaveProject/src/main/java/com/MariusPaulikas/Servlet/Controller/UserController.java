@@ -260,7 +260,7 @@ public class UserController {
 	
 	
 	@RequestMapping("/song/unlike/{song_id}")
-	public String RemoveSong (@PathVariable("song_id") Long songid, HttpSession session) {
+	public String RemoveSong (@PathVariable("song_id") Long songid, HttpSession session, RedirectAttributes redirectattributes) {
 		
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/police45";
@@ -270,6 +270,10 @@ public class UserController {
 		User user = userservice.findUserById(l);
 		
 		userservice.RemoveSong(user, songservice.findSongs(songid));
+		
+		Song song = songservice.findSongs(songid);
+		String title = song.getSong_title();
+		redirectattributes.addFlashAttribute("remove", "'" + title + "' has been removed from your playlist.");
 
 		return "redirect:/police45/playlist";
 	

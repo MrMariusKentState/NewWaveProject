@@ -22,10 +22,7 @@
 	
 }
 
-#upper {
-	background-color: #0000ffc2;
-	padding: 10px;
-}
+
 
 h1, h3, p{
 	margin-top: 10px;
@@ -33,14 +30,60 @@ h1, h3, p{
 	text-align: center;
 }
 
+
+
+#upper {
+	
+	background-color: #0000ffc2;
+	padding: 15px;
+	display: inline-block;
+	width: 980px;
+}
+
+
+
 #banner {
 
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 235px;
-	height: 150px;
+	display: inline;
+	margin-left: 20px;
+	width: 220px;
+	height: 158px;
 	
+}
+
+#banner2 {
+	display: inline;
+	margin-left: 20px;
+	border-radius: 52%;
+	height: 158px;
+	
+}
+
+#banner3 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+	
+}
+
+
+#banner4 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
+#banner5 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
+
+#eighties {
+	background-image: url("Police85Enhanced.jpg");
+	background-attachment: fixed;
+	padding-bottom: 40px;
 }
 
 .one {
@@ -52,3 +95,26 @@ h1, h3, p{
 	
 }
 
+.header {
+	text-decoration: underline;
+}
+
+
+.two {
+	font-weight: bold;
+}
+
+table {
+	position: relative;
+}
+
+th {
+	position: sticky;
+	top: 0;
+}
+
+#updates {
+	color: blue;
+	font-weight: bold;
+	
+}

@@ -32,10 +32,7 @@
 }
 
 
-#upper {
-	background-color: #0000ffc2;
-	padding: 10px;
-}
+
 
 h1, h4 {
 	margin-top: 10px;
@@ -43,18 +40,85 @@ h1, h4 {
 	text-align: center;
 }
 
-#banner {
-
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 235px;
-	height: 150px;
+p {
+	margin: 10px;
 	
 }
+
+
+#upper {
+	
+	background-color: #0000ffc2;
+	padding: 15px;
+	display: inline-block;
+	width: 980px;
+}
+
+
+
+#banner {
+
+	display: inline;
+	margin-left: 20px;
+	width: 220px;
+	height: 158px;
+	
+}
+
+#banner2 {
+	display: inline;
+	margin-left: 20px;
+	border-radius: 52%;
+	height: 158px;
+	
+}
+
+#banner3 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+	
+}
+
+
+#banner4 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
+#banner5 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
 
 #updates {
 	color: blue;
 	font-weight: bold;
 	
+}
+
+.bold {
+	font-weight: bold;
+}
+
+table {
+	position: relative;
+}
+
+th {
+	position: sticky;
+	top: 0;
+}
+
+#eighties {
+	background-image: url("Zenyatta80.jpg");
+	background-attachment: fixed;
+	padding-bottom: 40px;
+}
+
+.header {
+	text-decoration: underline;
 }

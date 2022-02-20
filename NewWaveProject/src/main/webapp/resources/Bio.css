@@ -39,22 +39,69 @@ h1 {
 	text-align: center;
 	margin-top: 10px;
 	margin-bottom: 20px;
+	padding-top: 30px;
 }
+
 
 
 
 #upper {
+	
 	background-color: #0000ffc2;
-	padding: 10px;
+	padding: 15px;
+	display: inline-block;
+	width: 980px;
 }
+
+
 
 #banner {
 
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 235px;
-	height: 150px;
+	display: inline;
+	margin-left: 20px;
+	width: 220px;
+	height: 158px;
+	
+}
+
+#banner2 {
+	display: inline;
+	margin-left: 20px;
+	border-radius: 52%;
+	height: 158px;
+	
+}
+
+#banner3 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+	
+}
+
+
+#banner4 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
+#banner5 {
+	display: inline;
+	margin-left: 20px;
+	height: 158px;
+}
+
+#eighties {
+	background-image: url("Synchronicity92.jpg");
+	padding-bottom: 40px;
+}
+
+.bodyparagraph {
+	
+	margin: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
 	
 }
 

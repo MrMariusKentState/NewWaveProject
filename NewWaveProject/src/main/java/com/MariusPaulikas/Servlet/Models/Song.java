@@ -30,8 +30,9 @@ public class Song {
 	
 	private String chart_notes;
 	
+	private String song_albumname;
 	
-	
+
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
@@ -111,7 +112,15 @@ public class Song {
 		return chart_notes;
 	}
 
-	
+
+	public String getSong_albumname() {
+		return song_albumname;
+	}
+
+	public void setSong_albumname(String song_albumname) {
+		this.song_albumname = song_albumname;
+	}
+
 	
 	
 	
