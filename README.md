@@ -1,5 +1,5 @@
 <h1>NewWaveProject</h1>
-<p>This is a website project devoted to the 45-year anniversary of when the Classic Rock group “the Police” was first formed. The backend is built with Python and Flask, and the frontend design incorporates the use of Bootstrap. </p>
+<p>This is a website project devoted to the 45-year anniversary of when the Classic Rock group “the Police” was first formed. This project is utilizes Java, Spring Tool Suite 4, and incorporates  Bootstrap. </p>
 <h3>Features</h3>
 <ul>
   <li>User registration and login with validations
